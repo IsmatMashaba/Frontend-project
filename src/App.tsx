@@ -4,10 +4,11 @@ import CountryList from "./components/country/CountryList";
 import CountryItem from "./components/country/CountryItem";
 
 function App() {
+    //countryList would be home page
   return (
       <div className="App">
         <CountryList/>
-         {/* <CountryItem />*/}
+
       </div>)
 }
 

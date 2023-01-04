@@ -1,6 +1,8 @@
 import React from "react";
 import {Country} from "../../types/type";
 
+import SearchForm from "../searchForm/SearchForm";
+
 type Props = {
     countryItem: Country
 }
@@ -8,11 +10,21 @@ type Props = {
 export default function CountryItem ({countryItem}: Props){
     return (
         <div>
-          <span><strong>Name</strong> : {countryItem.name.common} </span>
+            {/*<SearchForm/>*/}
+            {/*//create a search form*/}
+           {/* <div className='search-bar'>
+                <form onSubmit={submitHandler}>
+                    <input type='text' placeholder='Search country' onChange={ }/>
+                    <button type='submit'>Search</button>
+                </form>
 
-            <span><strong>Region:</strong>  {countryItem.region} </span>
-            <span><strong>  Area:</strong>   {countryItem.area}</span>
-         <span>
+            </div>*/}
+
+          <div>
+              <span><strong>Name</strong> : {countryItem.name.common} </span>
+              <span><strong>Region:</strong>  {countryItem.region} </span>
+              <span><strong>  Area:</strong>   {countryItem.area}</span>
+              <span>
              <strong>  Languages:</strong>
              <ul>
                 {countryItem.languages ? (
@@ -24,9 +36,8 @@ export default function CountryItem ({countryItem}: Props){
                 )}
             </ul>
          </span>
-
-            <img src={countryItem.flags.png} alt={countryItem.name.common}/>
-
+              <img src={countryItem.flags.png} alt={countryItem.name.common}/>
+          </div>
         </div>
     )
 }
