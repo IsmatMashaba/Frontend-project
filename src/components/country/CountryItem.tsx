@@ -8,12 +8,27 @@ type Props = {
 export default function CountryItem ({countryItem}: Props){
     return (
         <div>
-          <span>Name : {countryItem.name.common}</span>
-            <span>Region: {countryItem.region}</span>
-            <span>Area: {countryItem.area}</span>
-            {/*<span>Languages: {countryItem.languages.toString()}</span>*/}
-            <img src={countryItem.flags.png}/>
+          <span><strong>Name</strong> : {countryItem.name.common} </span>
+
+            <span><strong>Region:</strong>  {countryItem.region} </span>
+            <span><strong>  Area:</strong>   {countryItem.area}</span>
+         <span>
+             <strong>  Languages:</strong>
+             <ul>
+                {countryItem.languages ? (
+                    Object.entries(countryItem.languages).map(([key]) => (
+                        <li key={key}>{countryItem.languages[key]}</li>
+                    ))
+                ) : (
+                    <li>No Languages</li>
+                )}
+            </ul>
+         </span>
+
+            <img src={countryItem.flags.png} alt={countryItem.name.common}/>
 
         </div>
     )
 }
+
+
