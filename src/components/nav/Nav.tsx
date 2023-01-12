@@ -1,7 +1,5 @@
 import React from "react";
-
 import {Link} from "react-router-dom";
-
 
 import PublicIcon from '@mui/icons-material/Public';
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -33,13 +31,13 @@ export default function Nav(){
                         component="div"
                         sx={{display: {xs: "none", sm: "block"}}}
                     >
-                        Country
+                        Countries
                     </Typography>
                     <Box sx={{flexGrow: 20}}/>
                     <Box sx={{display: {xs: "none", md: "flex"}}}>
                         <Link  to="">
                             {" "}
-                            <HomeIcon/> {/*HomeIcon instead of HouseIcon*/}
+                            <HomeIcon/>
                         </Link>
                     </Box>
                     <Box sx={{flexGrow: 1}}/>

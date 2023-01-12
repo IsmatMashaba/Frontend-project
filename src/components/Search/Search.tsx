@@ -22,7 +22,7 @@ export default function Search() {
         <div className="Search_Form">
             <TextField
                 id="standard-search"
-                label="please enter country name"
+                label="Enter country name"
                 variant="standard"
                 onChange={getValue}
                 value={userInputs}

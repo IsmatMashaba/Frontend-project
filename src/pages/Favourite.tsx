@@ -1,9 +1,10 @@
 import React from "react";
+import FavouriteList from '../components/favourite/FavouriteList'
 
 export default function Favourite(){
     return (
         <div>
-            This is favourite page
+         <FavouriteList/>
         </div>
     )
 }

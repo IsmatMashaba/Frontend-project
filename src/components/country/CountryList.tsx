@@ -8,6 +8,7 @@ import CountryItem from "./CountryItem";
 import { Country } from '../../types/Type';
 import { countryActions } from '../../redux/slice/countrySlice'
 import Search from '../../components/Search/Search'
+import Loading from '../loading/Loading'
 
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -17,10 +18,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-
-
-import Alert from '@mui/material/Alert';
-import Stack from '@mui/material/Stack';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -36,8 +33,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 export default function CountryList() {
     //displaying the data
     const getData = useSelector((state: RootState) => state.countryItem.countries);
-
+    const isLoading = useSelector((state: RootState) => state.countryItem.isLoading);
     const disPatch = useDispatch<AppDispatch>();
+
     useEffect(() => {
         disPatch(fetchCountryData());
         disPatch(countryActions.getCountryDataPending());
@@ -49,27 +47,26 @@ export default function CountryList() {
     );
     const [filteredCountry, setFilteredCountry] = useState<Country[]>([]);
 
-    let search;
-
     useEffect(() => {
         const searchedCountry = getData.filter((country) =>
             country.name.common.toLocaleLowerCase().includes(getUserData.toLocaleLowerCase())
         );
         setFilteredCountry(searchedCountry);
-    }, [getUserData, getData]);
+    }, [getUserData,getData]);
 
+    let countryData;
 
     if (!getUserData) {
-        search = getData;
-        /*return <div>
-            Sorry we have not got this recipe yet!
-        </div>*/
+        countryData = getData;
+
     } else {
-        search = filteredCountry;
+        countryData = filteredCountry;
     }
 
-    return (
+
+            return (
         <div>
+            {isLoading ? <Loading/> : ""}
             <div>
                 <Search/>
             </div>
@@ -85,16 +82,14 @@ export default function CountryList() {
                             <StyledTableCell align="right">Name</StyledTableCell>
                             <StyledTableCell align="right">Region</StyledTableCell>
                             <StyledTableCell align="right">Population</StyledTableCell>
-
                             <StyledTableCell align="right">Languages</StyledTableCell>
-
                             <StyledTableCell align="right"/>
                             <StyledTableCell align="right"/>
                         </TableRow>
                     </TableHead>
 
                     <TableBody className="table-body">
-                        {search.map((countryItems) => (
+                        {countryData.map((countryItems) => (
                             <CountryItem
                                 key={crypto.randomUUID()}
                                 countryData={countryItems}

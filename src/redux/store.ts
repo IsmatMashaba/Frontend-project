@@ -1,14 +1,15 @@
-import React from "react";
-
 import {configureStore} from "@reduxjs/toolkit";
+
 import countryReducer from './slice/countrySlice'
 import userReducer from "./slice/userSlice";
+import {favouriteReducer} from "./slice/favouriteSlice";
 
 const store = configureStore({
     reducer: {
       countryItem: countryReducer,
         userItem: userReducer,
-       /* search: searchReducer,*/
+        favouriteItem:favouriteReducer
+
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
@@ -17,7 +18,6 @@ const store = configureStore({
 });
 
 export type RootState = ReturnType<typeof store.getState>;
-// type: AppDispatch- redux toolkit
 export type AppDispatch = typeof store.dispatch;
 export default store;
 
