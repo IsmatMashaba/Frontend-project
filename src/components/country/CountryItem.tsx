@@ -1,11 +1,10 @@
 import React, {useState} from "react";
 import {Country} from '../../types/Type'
 import {RootState} from "../../redux/store";
-
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Fragment } from "react";
-import {countryActions} from "../../redux/slice/countrySlice";
+import favouriteActions from "../../redux/slice/favouriteSlice";
 
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
@@ -13,10 +12,9 @@ import { styled } from "@mui/material/styles";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
 import { pink } from "@mui/material/colors";
-
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
-import favouriteActions from "../../redux/slice/favouriteSlice";
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -42,9 +40,8 @@ type Props = {
 }
 
 export default function CountryItem({ countryData }: Props) {
-
-    /*this part is for warning message for favourite*/
     const [open, setOpen] = useState(false);
+    const [isValid, setIsValid] = useState(false);
 
     const handleClose = (
         event?: React.SyntheticEvent | Event,
@@ -56,27 +53,25 @@ export default function CountryItem({ countryData }: Props) {
 
         setOpen(false);
     };
-    const getData =useSelector((state:RootState)=> state.favouriteItem)
-    let isFavorite = getData.countries.some(
-        (item)=>
+    const getData = useSelector((state: RootState) => state.favouriteItem);
+
+    const favDispatch = useDispatch();
+    let isFavorite = getData.favouriteCountries.some(
+        (item) =>
             item.name.common.toLocaleLowerCase() ===
             countryData.name.common.toLocaleLowerCase()
-    )
-    const favDispatch = useDispatch();
+    );
     function getValue() {
-        const isFavoriteItemDuplicate = getData.countries.some(
-            (item) =>
-                item.name.common.toLocaleLowerCase() ===
-                countryData.name.common.toLocaleLowerCase()
-        );
-        if (isFavoriteItemDuplicate) {
+        if (isFavorite) {
+            setIsValid(false);
             setOpen(true);
             return;
         } else {
+            setIsValid(true);
+            setOpen(false);
             favDispatch(favouriteActions.addFavouriteItem(countryData));
         }
     }
-
     return (
         <Fragment>
             <StyledTableRow key={crypto.randomUUID()} className="CountryTable">
@@ -125,8 +120,8 @@ export default function CountryItem({ countryData }: Props) {
                 </StyledTableCell>
                 <StyledTableCell>
                     {" "}
-                    <Link to={`/countries/${countryData.name.common}`}>
-                        MoreDetails
+                    <Link to={`/countriesDetails/${countryData.name.common}`}>
+                        More
                     </Link>{" "}
                 </StyledTableCell>
 

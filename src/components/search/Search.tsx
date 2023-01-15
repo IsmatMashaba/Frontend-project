@@ -1,11 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-//mui
-import TextField from "@mui/material/TextField";
-//component
 import { userActions } from '../../redux/slice/userSlice';
 
+
+import TextField from "@mui/material/TextField";
 
 export default function Search() {
     const [userInputs, setUserInput] = useState<string>("");
@@ -17,7 +16,16 @@ export default function Search() {
 
         dispatch(userActions.getUserInput(userInputs));
     }
+    function searchHandler() {
+        setUserInput("");
+        dispatch(userActions.getUserInput(userInputs));
+    }
 
+    function key(event: React.KeyboardEvent<HTMLInputElement>) {
+        if (event.keyCode === 1) {
+            searchHandler();
+        }
+    }
     return (
         <div className="Search_Form">
             <TextField

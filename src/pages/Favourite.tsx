@@ -1,7 +1,12 @@
 import React from "react";
 import FavouriteList from '../components/favourite/FavouriteList'
 
-export default function Favourite(){
+import { useSelector } from "react-redux";
+import { RootState } from '../redux/store';
+export default function Favorite() {
+    const countData = useSelector(
+        (state: RootState) => state.countryItem.countries
+    );
     return (
         <div>
          <FavouriteList/>

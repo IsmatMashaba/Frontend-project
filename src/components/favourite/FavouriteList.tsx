@@ -1,4 +1,3 @@
-
 import {useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
 import FavouriteItem from '../favourite/FavouriteItem'
@@ -12,6 +11,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
+
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.white,
@@ -23,7 +24,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 export default function FavouriteList(){
-    const favouriteItems = useSelector((state:RootState)=>state.favouriteItem.countries)
+    const favouriteItems = useSelector((state:RootState)=>state.favouriteItem.favouriteCountries)
 
     return (
         <div>
@@ -39,9 +40,7 @@ export default function FavouriteList(){
                             <StyledTableCell align="right">Name</StyledTableCell>
                             <StyledTableCell align="right">Region</StyledTableCell>
                             <StyledTableCell align="right">Population</StyledTableCell>
-
                             <StyledTableCell align="right">Languages</StyledTableCell>
-
                             <StyledTableCell align="right"/>
                             <StyledTableCell align="right"/>
                         </TableRow>
@@ -49,7 +48,9 @@ export default function FavouriteList(){
                     <TableBody>
                         {favouriteItems.map((item)=>(
                             <FavouriteItem  item={item}/>
-                        ))}
+                        ))
+                        }
+
                     </TableBody>
                 </Table>
 

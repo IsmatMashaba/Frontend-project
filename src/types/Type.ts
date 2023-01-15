@@ -7,6 +7,7 @@ export type Country = {
     flags: {
         png:string
     };
+    capital: string[];
     area: number;
     languages: {
         [key: string]: string

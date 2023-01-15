@@ -19,7 +19,6 @@ const countrySlice = createSlice({
     name: 'country',
     initialState,
     reducers: {
-      // get data
         getCountryData: (state,actions)=> {
             state.countries = actions.payload
 
@@ -28,6 +27,29 @@ const countrySlice = createSlice({
         getCountryDataPending: (state)=>{
             state.isLoading = true
         },
+        countryAscending: (state) => {
+            state.countries.sort((a, b) => {
+                if (a.name.common > b.name.common) {
+                    return -1;
+                }
+                if (a.name.common < b.name.common) {
+                    return 1;
+                }
+                return 0;
+            });
+        },
+        countryDescending: (state) => {
+            state.countries.sort((a, b) => {
+                if (a.name.common < b.name.common) {
+                    return -1;
+                }
+                if (a.name.common > b.name.common) {
+                    return 1;
+                }
+                return 0;
+            });
+        },
+
 
     },
 })
