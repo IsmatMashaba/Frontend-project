@@ -21,9 +21,9 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 
 export default function CountryDetails() {
-    const name = useParams(); //it gives us object
+    const {name} = useParams(); //it gives us object
         console.log(name, 'name')
-    const countryUrl= "https://restcountries.com/v3.1/name/" + name.name;
+    const countryUrl= "https://restcountries.com/v3.1/name/" ;
 
     const getData = useSelector(
         (state: RootState) => state.countryDetails.countryItem
