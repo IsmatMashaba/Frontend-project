@@ -21,7 +21,7 @@ function App() {
               <Route path="/favorite" element={<FavoriteList/>}/>
               <Route path="/about" element={<About/>}/>
               <Route
-                  path="/countriesDetails/:name"
+                  path="/countries/:name"
                   element={<CountryDetails/>}
               />
           </Routes>

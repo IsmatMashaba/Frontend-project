@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useDispatch,useSelector } from "react-redux";
 import { AppDispatch } from '../redux/store';
@@ -22,8 +23,8 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 export default function CountryDetails() {
     const {name} = useParams(); //it gives us object
-        console.log(name, 'name')
-    const countryUrl= "https://restcountries.com/v3.1/name/" ;
+    console.log(name, 'name')
+    const countryUrl= `https://restcountries.com/v3.1/name/${name}`;
 
     const getData = useSelector(
         (state: RootState) => state.countryDetails.countryItem
@@ -35,19 +36,20 @@ export default function CountryDetails() {
     const dispatchData = useDispatch<AppDispatch>();
 
     useEffect(() => {
+        console.log("hello")
         dispatchData(fetchCountryDetails(countryUrl));
-        dispatchData(countryDetailsAction.getCountryDataPending());
     }, [dispatchData, countryUrl]);
 
 
     return (
         <div className="Details">
             {isLoading ? <Loading/> : ""}
+            <p>{getData[0]?.name?.common}</p>
             <Card sx={{ maxWidth: 345 }}>
                 <CardHeader
                     avatar={
                         <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                            {getData[0].name.common[0].charAt(0)}
+                            {getData[0]?.name?.common}
                         </Avatar>
                     }
                     action={
@@ -55,39 +57,39 @@ export default function CountryDetails() {
                             <MoreVertIcon />
                         </IconButton>
                     }
-                    title={getData[0].name.common}
-                    subheader={getData[0].capital}
+                    title={getData[0]?.name?.common}
+                    subheader={getData[0]?.capital}
                 />
                 <CardMedia
                     component="img"
                     height="194"
-                    image={getData[0].flags.png}
+                    image={getData[0]?.flags?.png}
                     alt="image"
                 />
 
                 <CardContent>
                     <Typography variant="body2" color="text.secondary">
                         <li>
-                            Name:<strong>{getData[0].name.common}</strong>
+                            Name:<strong>{getData[0]?.name?.common}</strong>
                         </li>
                         <li>
-                            Capital:<strong>{getData[0].capital}</strong>
+                            Capital:<strong>{getData[0]?.capital}</strong>
                         </li>
                         <li>
                             {" "}
-                            Region:<strong>{getData[0].region}</strong>
+                            Region:<strong>{getData[0]?.region}</strong>
                         </li>
                         <li>
-                            Population:<strong>{getData[0].population}</strong>
+                            Population:<strong>{getData[0]?.population}</strong>
                         </li>
 
                         <li>
                             languages:
                             <strong>
-                                {getData[0].languages ? (
-                                    Object.entries(getData[0].languages).map(([key]) => (
+                                {getData[0]?.languages ? (
+                                    Object.entries(getData[0]?.languages)?.map(([key]) => (
                                         <li key={crypto.randomUUID()}>
-                                            {getData[0].languages[key]}
+                                            {getData[0]?.languages[key]}
                                         </li>
                                     ))
                                 ) : (
@@ -101,3 +103,23 @@ export default function CountryDetails() {
         </div>
     );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

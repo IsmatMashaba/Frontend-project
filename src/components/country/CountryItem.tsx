@@ -120,7 +120,7 @@ export default function CountryItem({ countryData }: Props) {
                 </StyledTableCell>
                 <StyledTableCell>
                     {" "}
-                    <Link to={`/countriesDetails/${countryData.name.common}`}>
+                    <Link to={`/countries/${countryData.name.common}`}>
                         More
                     </Link>{" "}
                 </StyledTableCell>
