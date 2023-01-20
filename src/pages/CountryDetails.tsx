@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { RootState } from "../redux/store";
 import {fetchCountryDetails} from "../redux/thunk/countryDetails";
-import { countryDetailsAction } from '../redux/slice/countryDetailsSlice';
 import Loading from '../components/loading/Loading';
 
 import Card from "@mui/material/Card";
