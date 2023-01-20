@@ -22,8 +22,8 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 export default function CountryDetails() {
     const name = useParams(); //it gives us object
-
-    const countryUrl= `https://restcountries.com/v3.1/name/${name}`
+        console.log(name, 'name')
+    const countryUrl= "https://restcountries.com/v3.1/name/" + name.name;
 
     const getData = useSelector(
         (state: RootState) => state.countryDetails.countryItem
@@ -47,7 +47,7 @@ export default function CountryDetails() {
                 <CardHeader
                     avatar={
                         <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                            {getData[0].name.common[0]}
+                            {getData[0].name.common[0].charAt(0)}
                         </Avatar>
                     }
                     action={
